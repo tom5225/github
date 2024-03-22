@@ -1,0 +1,14 @@
+---
+name: Check Connectivity
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+
+jobs:
+  connectivity_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Connectivity
+        run: |
+          # 在這裡添加你的命令或腳本來檢查連接性
