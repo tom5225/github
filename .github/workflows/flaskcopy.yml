@@ -1,14 +1,26 @@
----
 name: Check Connectivity
 
 on:
   schedule:
     - cron: '*/1 * * * *'
+  push:
 
 jobs:
-  connectivity_check:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Connectivity
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Install Ansible
         run: |
-          # 在這裡添加你的命令或腳本來檢查連接性
+          python -m pip install --upgrade pip
+          pip install ansible
+      
+      - name: Run Ansible Playbook
+        run: ansible-playbook check_status.yml
